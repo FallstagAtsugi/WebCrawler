@@ -1,5 +1,6 @@
 import time
 import requests
+from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
 ua = UserAgent()
@@ -37,3 +38,14 @@ with open('result.html', 'w', encoding='utf-8') as f:
     f.write(response_html)
 
 print('ファイルに保存')
+
+
+url = "https://www.sejuku.net/"
+
+
+bs = BeautifulSoup(response.text, 'html.parser')
+bs_ul = bs.find('ul')
+
+for bs_li in bs_ul.find_all('li'):
+    bs_text = bs_li.text
+    print(bs_text)
